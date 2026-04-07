@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 import pytest
 from config import config
 from vector_store import VectorStore
-from search_tools import CourseSearchTool, ToolManager
+from search_tools import CourseSearchTool, CourseOutlineTool, ToolManager
 from ai_generator import AIGenerator
 from rag_system import RAGSystem
 
@@ -29,9 +29,15 @@ def ai_generator():
 
 
 @pytest.fixture(scope="session")
-def tool_manager(search_tool):
+def outline_tool(vector_store):
+    return CourseOutlineTool(vector_store)
+
+
+@pytest.fixture(scope="session")
+def tool_manager(search_tool, outline_tool):
     tm = ToolManager()
     tm.register_tool(search_tool)
+    tm.register_tool(outline_tool)
     return tm
 
 

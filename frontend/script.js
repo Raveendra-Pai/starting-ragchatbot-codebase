@@ -161,7 +161,9 @@ async function startNewChat() {
     if (currentSessionId) {
         try {
             await fetch(`${API_URL}/session/${currentSessionId}`, { method: 'DELETE' });
-        } catch (_) {}
+        } catch (err) {
+            console.warn('Failed to clear session on backend:', err);
+        }
     }
     createNewSession();
 }

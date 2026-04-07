@@ -1,4 +1,5 @@
 import chromadb
+import json
 from chromadb.config import Settings
 from typing import List, Dict, Any, Optional
 from dataclasses import dataclass
@@ -267,7 +268,6 @@ class VectorStore:
 
     def get_course_metadata_by_name(self, course_name: str) -> Optional[Dict[str, Any]]:
         """Resolve a course name via semantic search and return its full metadata."""
-        import json
         try:
             results = self.course_catalog.query(
                 query_texts=[course_name],
@@ -286,4 +286,3 @@ class VectorStore:
         except Exception as e:
             print(f"Error getting course metadata by name: {e}")
             return None
-    

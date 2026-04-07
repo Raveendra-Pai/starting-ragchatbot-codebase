@@ -25,7 +25,8 @@ uploads/
 .idea/
 *.swp
 *.swo
-*.env
+.env
+.env.*
 
 # OS
 .DS_Store
